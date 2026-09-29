@@ -1,0 +1,790 @@
+
+/* ============================================================
+   ASP.NET CORE RAZOR PAGES
+   CHROME / GUNMETAL / SILVER THEME
+   ============================================================ */
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+:root {
+    --chrome-black: #080b0e;
+    --chrome-dark: #11161b;
+    --chrome-panel: #181e24;
+    --chrome-panel-2: #20272e;
+    --chrome-dark-silver: #39434c;
+    --chrome-silver: #69747d;
+    --chrome-light-silver: #aeb7bd;
+    --chrome-bright: #e3e7e9;
+    --chrome-white: #f6f7f8;
+    --chrome-blue: #258bd1;
+    --chrome-blue-light: #52b6ff;
+    --chrome-blue-dark: #07558c;
+    --border-dark: #252d34;
+    --border-light: #66737d;
+    --text: #e2e7ea;
+    --text-light: #f4f6f7;
+    --text-muted: #89959e;
+    --success: #38b878;
+    --warning: #d9a62b;
+    --danger: #d95353;
+    --sidebar-width: 240px;
+    --topbar-height: 64px;
+}
+
+
+/* ============================================================
+   GLOBAL RESET
+   ============================================================ */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: var(--chrome-black);
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: var(--text);
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: radial-gradient( circle at 50% -20%, #34424d 0, #151c22 38%, #080b0e 80% );
+    background-attachment: fixed;
+}
+
+
+/* ============================================================
+   GLOBAL TEXT
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    color: var(--chrome-white);
+}
+
+p {
+    color: var(--text);
+}
+
+a {
+    color: var(--chrome-blue-light);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #8bd1ff;
+    }
+
+
+/* ============================================================
+   MAIN APPLICATION LAYOUT
+   ============================================================ */
+
+.helpdesk-layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+
+.sidebar {
+    position: sticky;
+    top: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient( 180deg, #29323a 0%, #1b2229 12%, #11171c 45%, #090d11 100% );
+    border-right: 1px solid #59656e;
+    box-shadow: 8px 0 25px rgba(0, 0, 0, .45), inset -1px 0 0 rgba(255,255,255,.08);
+    z-index: 100;
+}
+
+
+    /* Metallic highlight */
+
+    .sidebar::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1px;
+        height: 100%;
+        background: linear-gradient( to bottom, transparent, #cbd1d5, #626d75, transparent );
+        opacity: .45;
+    }
+
+
+/* ============================================================
+   SIDEBAR LOGO
+   ============================================================ */
+
+.sidebar-logo {
+    height: var(--topbar-height);
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    color: var(--chrome-white);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    background: linear-gradient( 180deg, #4b565e 0%, #252e35 45%, #171d22 100% );
+    border-bottom: 1px solid #626d75;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 2px 6px rgba(0,0,0,.4);
+}
+
+
+/* Chrome logo */
+
+.sidebar-logo-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: #111;
+    background: linear-gradient( 145deg, #f8f9fa 0%, #cdd3d7 25%, #69747d 48%, #343c43 68%, #e7eaec 100% );
+    border: 1px solid #d4d9dc;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.8), inset 0 -2px 3px rgba(0,0,0,.45), 0 3px 8px rgba(0,0,0,.5);
+}
+
+
+/* ============================================================
+   SIDEBAR NAVIGATION
+   ============================================================ */
+
+.sidebar-nav {
+    padding: 16px 10px;
+}
+
+.nav-section-title {
+    margin: 10px 10px 7px;
+    color: #78858f;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.nav-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 44px;
+    margin: 3px 0;
+    padding: 0 13px;
+    color: #c0c9cf;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: .15s ease;
+}
+
+    .nav-item:hover {
+        color: white;
+        background: linear-gradient( 90deg, rgba(76,145,194,.25), rgba(40,65,82,.12) );
+        border-color: #465a68;
+    }
+
+    .nav-item.active {
+        color: white;
+        background: linear-gradient( 90deg, #155d91, #0c3655 );
+        border-color: #2d83bd;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 3px 10px rgba(0,0,0,.35);
+    }
+
+        .nav-item.active::before {
+            content: "";
+            position: absolute;
+            left: -1px;
+            top: 5px;
+            bottom: 5px;
+            width: 3px;
+            background: linear-gradient( #69c6ff, #0876bd );
+            border-radius: 0 3px 3px 0;
+            box-shadow: 0 0 8px rgba(82,182,255,.8);
+        }
+
+.nav-icon {
+    width: 30px;
+    margin-right: 6px;
+    color: #8f9da7;
+    text-align: center;
+    font-size: 16px;
+}
+
+.nav-item.active .nav-icon {
+    color: #68c4ff;
+}
+
+.nav-text {
+    color: inherit;
+    font-size: 14px;
+}
+
+
+/* ============================================================
+   MAIN AREA
+   ============================================================ */
+
+.main {
+    min-width: 0;
+    min-height: 100vh;
+    background: linear-gradient( 135deg, #0d1217, #151c22 50%, #0a0e12 );
+}
+
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    height: var(--topbar-height);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 24px;
+    background: linear-gradient( 180deg, #4a555d 0%, #303940 22%, #1c242b 55%, #141a20 100% );
+    border-bottom: 1px solid #69757e;
+    box-shadow: 0 5px 18px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.16);
+    z-index: 50;
+}
+
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+
+.content {
+    width: 100%;
+    min-width: 0;
+    padding: 28px;
+    color: var(--text);
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.page-title {
+    margin: 0;
+    color: var(--chrome-white);
+    font-size: 28px;
+    font-weight: 650;
+    text-shadow: 0 2px 5px rgba(0,0,0,.8);
+}
+
+.page-subtitle {
+    margin-top: 5px;
+    color: var(--text-muted);
+}
+
+
+/* ============================================================
+   CHROME PANEL
+   ============================================================ */
+
+.panel {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient( 145deg, #252e35, #151c22 40%, #10161b );
+    border: 1px solid #46535d;
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+    .panel::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient( 90deg, transparent, #d8dde0, transparent );
+        opacity: .5;
+    }
+
+.panel-header {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 18px;
+    background: linear-gradient( 180deg, #3b464e, #252e35 );
+    border-bottom: 1px solid #59656e;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.panel-title {
+    color: var(--chrome-white);
+    font-size: 15px;
+    font-weight: 650;
+}
+
+.panel-body {
+    padding: 20px;
+}
+
+
+/* ============================================================
+   TICKET GRID
+   ============================================================ */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    margin: 0;
+    color: var(--text);
+    border-collapse: collapse;
+}
+
+    .table thead th {
+        height: 44px;
+        padding: 0 13px;
+        color: #f1f3f4;
+        background: linear-gradient( 180deg, #4b565e, #303a42 );
+        border-bottom: 1px solid #77838b;
+        font-size: 11px;
+        font-weight: 700;
+        text-align: left;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+    }
+
+    .table tbody td {
+        height: 48px;
+        padding: 0 13px;
+        color: #d5dde2;
+        background: rgba(14,20,25,.7);
+        border-bottom: 1px solid #29323a;
+    }
+
+    .table tbody tr:hover td {
+        background: linear-gradient( 90deg, rgba(37,139,209,.18), rgba(37,139,209,.04) );
+        color: #ffffff;
+    }
+
+.ticket-id {
+    color: #8997a1;
+    font-family: Consolas, monospace;
+    font-size: 12px;
+}
+
+.ticket-subject {
+    color: #f0f3f5;
+    font-weight: 600;
+}
+
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    color: #f3f5f6;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .15s ease;
+}
+
+
+/* Chrome primary */
+
+.btn-primary {
+    color: white;
+    background: linear-gradient( 180deg, #55b9f5 0%, #268bcf 35%, #0d5b91 100% );
+    border: 1px solid #71c7fa;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 4px 10px rgba(0,0,0,.45);
+}
+
+    .btn-primary:hover {
+        background: linear-gradient( 180deg, #78caff, #3299dc, #126aa4 );
+        box-shadow: 0 0 12px rgba(82,182,255,.3), inset 0 1px 0 rgba(255,255,255,.45);
+    }
+
+
+/* Chrome secondary */
+
+.btn-secondary {
+    color: #edf0f2;
+    background: linear-gradient( 180deg, #66727a, #3b454d 45%, #262e35 );
+    border: 1px solid #849098;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 3px 7px rgba(0,0,0,.35);
+}
+
+    .btn-secondary:hover {
+        background: linear-gradient( 180deg, #7b878e, #4b565e );
+    }
+
+
+/* ============================================================
+   FORM CONTROLS
+   ============================================================ */
+
+.form-label,
+label {
+    display: block;
+    margin-bottom: 7px;
+    color: #d7dde1;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.form-control,
+.form-select,
+input,
+select,
+textarea {
+    color: #e8edf0;
+    background: linear-gradient( 180deg, #222c33, #11171c );
+    border: 1px solid #53616b;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,.5);
+    outline: none;
+}
+
+.form-control,
+.form-select {
+    min-height: 38px;
+    padding: 7px 11px;
+}
+
+textarea.form-control {
+    min-height: 120px;
+}
+
+.form-control::placeholder,
+textarea::placeholder {
+    color: #7f8b94;
+    opacity: 1;
+}
+
+.form-control:focus,
+.form-select:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    color: white;
+    border-color: var(--chrome-blue-light);
+    box-shadow: 0 0 0 2px rgba(82,182,255,.15), inset 0 2px 5px rgba(0,0,0,.5);
+}
+
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+.header-search {
+    width: 280px;
+    margin-right: 18px;
+}
+
+    .header-search input {
+        width: 100%;
+        height: 37px;
+        padding: 0 12px;
+        color: #edf2f4;
+        background: linear-gradient( 180deg, #202a31, #11171c );
+        border: 1px solid #66737c;
+    }
+
+
+/* ============================================================
+   USER AREA
+   ============================================================ */
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 16px;
+    border-left: 1px solid #66727a;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #15191c;
+    font-weight: 700;
+    background: linear-gradient( 145deg, #ffffff, #bfc6ca 25%, #646f77 50%, #252c31 75%, #e1e5e7 );
+    border: 1px solid #c5cdd1;
+    border-radius: 50%;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,.7), 0 3px 8px rgba(0,0,0,.5);
+}
+
+.user-name {
+    color: #edf1f3;
+}
+
+
+/* ============================================================
+   STATUS BADGES
+   ============================================================ */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    height: 24px;
+    padding: 0 9px;
+    color: white;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 2px 5px rgba(0,0,0,.3);
+}
+
+.badge-open {
+    background: linear-gradient(#55b9f5, #0872b7);
+    border: 1px solid #6ac6ff;
+}
+
+.badge-progress {
+    color: #211b0a;
+    background: linear-gradient(#f5d55b, #c28b13);
+    border: 1px solid #f3ca38;
+}
+
+.badge-resolved {
+    background: linear-gradient(#45c987, #19804f);
+    border: 1px solid #60dc9d;
+}
+
+.badge-closed {
+    background: linear-gradient(#89949c, #4e5961);
+    border: 1px solid #a8b1b6;
+}
+
+
+/* ============================================================
+   PRIORITY
+   ============================================================ */
+
+.priority-high {
+    color: white;
+    background: linear-gradient(#ed6666, #ad3030);
+    border: 1px solid #fa8585;
+}
+
+.priority-medium {
+    color: #211b0a;
+    background: linear-gradient(#f5d55b, #c28b13);
+    border: 1px solid #f3ca38;
+}
+
+.priority-low {
+    color: white;
+    background: linear-gradient(#45c987, #19804f);
+    border: 1px solid #60dc9d;
+}
+
+
+/* ============================================================
+   DETAILS
+   ============================================================ */
+
+.details-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 20px;
+}
+
+.details-list {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr);
+    row-gap: 13px;
+}
+
+.details-label {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.details-value {
+    color: var(--text-light);
+}
+
+
+/* ============================================================
+   PAGINATION
+   ============================================================ */
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+    color: var(--text-muted);
+}
+
+.page-btn {
+    min-width: 34px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #d5dce0;
+    background: linear-gradient( #59656d, #2b343b );
+    border: 1px solid #707c84;
+    border-radius: 4px;
+}
+
+    .page-btn:hover {
+        color: white;
+        background: linear-gradient( #6e7a82, #3b464e );
+    }
+
+    .page-btn.active {
+        color: white;
+        background: linear-gradient( #55b9f5, #086aa8 );
+        border-color: #70c8ff;
+    }
+
+
+/* ============================================================
+   ALERTS
+   ============================================================ */
+
+.alert {
+    padding: 12px 15px;
+    color: var(--text);
+    background: #1c252c;
+    border: 1px solid #4a5861;
+    border-radius: 5px;
+}
+
+.alert-success {
+    color: #a9ebc9;
+    background: rgba(56,184,120,.1);
+    border-color: rgba(56,184,120,.4);
+}
+
+.alert-warning {
+    color: #f1d68d;
+    background: rgba(217,166,43,.1);
+    border-color: rgba(217,166,43,.4);
+}
+
+.alert-danger {
+    color: #ffb5b5;
+    background: rgba(217,83,83,.1);
+    border-color: rgba(217,83,83,.4);
+}
+
+
+/* ============================================================
+   CHROME DIVIDER
+   ============================================================ */
+
+.chrome-divider {
+    height: 1px;
+    margin: 20px 0;
+    background: linear-gradient( 90deg, transparent, #727e86, #e0e4e6, #727e86, transparent );
+    opacity: .45;
+}
+
+
+/* ============================================================
+   SCROLLBARS
+   ============================================================ */
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #080b0e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient( 90deg, #343e45, #87939b, #343e45 );
+    border: 2px solid #080b0e;
+    border-radius: 8px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient( 90deg, #4b565e, #adb6bb, #4b565e );
+    }
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 750px) {
+
+    .helpdesk-layout {
+        display: block;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+    }
+
+    .main {
+        width: 100%;
+        min-height: 0;
+    }
+
+    .topbar {
+        position: relative;
+    }
+
+    .content {
+        padding: 18px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header-search {
+        width: 180px;
+    }
+}

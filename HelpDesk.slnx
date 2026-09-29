@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="HelpDesk.Api/HelpDesk.Api.csproj" />
+  <Project Path="HelpDesk.Domain/HelpDesk.Domain.csproj" />
+  <Project Path="HelpDesk.Kernel/HelpDesk.Kernel.csproj" Id="ea0a43f1-b23f-4013-81dd-ab75e5e827e0" />
+  <Project Path="HelpDesk.Tests/HelpDesk.Tests.csproj" />
+  <Project Path="HelpDeskApp/HelpDesk.App.csproj" />
+</Solution>

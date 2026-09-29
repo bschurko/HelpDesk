@@ -1,0 +1,45 @@
+﻿@page
+@model HelpDesk.App.Pages.Teams.IndexModel
+
+@{
+    ViewData["Title"] = "Teams";
+}
+
+<div class="page-heading">
+
+    <div>
+        <h1>Teams</h1>
+        <p>Manage support teams and assignments</p>
+    </div>
+
+    <button class="btn btn-primary">
+        ＋ Add Team
+    </button>
+
+</div>
+
+
+<div class="cards">
+
+    @foreach (var team in Model.Teams)
+    {
+
+
+        <div class="panel stat-card">
+
+            <span class="stat-icon">
+                @team.Organization
+            </span>
+
+            <div>
+                <h2>@team.Name</h2>
+                <p>
+                    @team.DateCreated
+                </p>
+            </div>
+
+        </div>
+    } 
+
+</div>
+

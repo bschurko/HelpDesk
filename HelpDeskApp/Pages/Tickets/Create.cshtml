@@ -1,0 +1,183 @@
+
+@page
+@model HelpDeskRazor.Pages.Tickets.CreateModel
+
+@{
+    ViewData["Title"] = "Create Ticket";
+}
+
+<div class="page-heading">
+
+    <div>
+
+        <div class="eyebrow">
+            Tickets / Create
+        </div>
+
+        <h1>Create Ticket</h1>
+
+        <p>
+            Create a new support request
+        </p>
+
+    </div>
+
+</div>
+
+
+<form method="post" enctype="multipart/form-data" asp-page-handler="SaveTicket"
+        asp-route-method="@Request.Query["method"]"
+        asp-route-id="@Request.Query["id"]"
+      class="panel form-panel">
+
+    <div class="form-field">
+
+        <label asp-for="Input.Title">
+            Subject <span>*</span>
+        </label>
+
+        <input asp-for="Input.Title"
+               placeholder="Enter a short description"
+               required />
+
+    </div>
+
+
+    <div class="form-field">
+
+        <label asp-for="Input.Description">
+            Description <span>*</span>
+        </label>
+
+        <textarea asp-for="Input.Description"
+                  rows="6"
+                  placeholder="Provide details about the issue..."
+                  required>
+        </textarea>
+
+    </div>
+
+     <div class="form-field">
+
+        <label asp-for="Input.Tags">
+            Tags 
+        </label>
+
+        <input asp-for="Input.Tags"
+               placeholder="Enter a tags separated by comma"
+                />
+
+    </div>
+
+    <div  class="form-field">
+        <label asp-for="File">Upload Attachment</label>
+        <input type="file" asp-for="File" placeholder="Upload File"></file>
+        
+    </div>
+
+    <div class="form-field">
+        <label asp-for="Input.DateCreated">
+            Date Created 
+        </label>
+
+        <input asp-for="Input.DateCreated"
+               placeholder="Date Created"
+               readonly />
+    </div>
+
+    <div class="form-field">
+        <label asp-for="Input.DateModified">
+            Date Created 
+        </label>
+
+        <input asp-for="Input.DateModified"
+               placeholder="Date Modified"
+               readonly />
+    </div>
+
+
+    <div class="form-row">
+
+         <div class="form-field">
+
+            <label asp-for="Input.StatusId">
+                Priority
+            </label>
+
+            <select asp-for="Input.StatusId" asp-items="Model.StatusOptions">
+                <option value="">-- Select Status --</option>
+            </select>
+
+        </div>
+
+        <div class="form-field">
+
+            <label asp-for="Input.PriorityId">
+                Priority
+            </label>
+
+            <select asp-for="Input.PriorityId" asp-items="Model.PriorityOptions">
+                <option value="">-- Select Priority --</option>
+            </select>
+
+        </div>
+
+
+        <div class="form-field">
+
+            <label asp-for="Input.TeamId">
+                Team
+            </label>
+
+            <select asp-for="Input.TeamId" asp-items="Model.TeamOptions">
+                <option value="">-- Select Team --</option>
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-field">
+
+        <label asp-for="Input.AssignedId">
+            Assign To
+        </label>
+
+        <select asp-for="Input.AssignedId" asp-items="Model.UserOptions">
+            <option value="">-- Select User --</option>
+           
+
+        </select>
+
+    </div>
+
+     <div class="form-field">
+
+        <label asp-for="Input.CreatedById">
+            Created By
+        </label>
+
+        <select asp-for="Input.CreatedById" asp-items="Model.UserOptions">
+            <option value="">-- Select User --</option>
+           
+
+        </select>
+
+    </div>
+
+
+    <div class="form-actions"> 
+
+        <a class="btn btn-secondary"
+           asp-page="/Tickets/Index">
+            Cancel
+        </a>
+
+        <button class="btn btn-primary"
+                type="submit">
+            Create Ticket
+        </button>
+
+    </div>
+</form>

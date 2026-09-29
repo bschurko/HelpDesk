@@ -1,0 +1,186 @@
+@page
+@model HelpDeskRazor.Pages.Tickets.IndexModel
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<div class="page-heading">
+    <div>
+        <h1>Tickets</h1>
+        <p>View and manage helpdesk tickets</p>
+    </div>
+
+    <a class="btn btn-primary"
+       asp-page="/Tickets/Create">
+        ＋ Create Ticket
+    </a>
+</div>
+
+<div class="filters">
+
+    <div class="search-box">
+        ⌕
+        <input id="ticketSearch"
+               placeholder="Search tickets..." />
+    </div>
+
+    <select id="statusSelect">
+        <option class="option-dropdown">Status: All</option>
+        @foreach(var status in Model.Statuses)
+        {
+            <option  class="option-dropdown">@status.Name</option>
+        }
+    </select>
+
+    <select id="prioritySelect">
+        <option class="option-dropdown">Priority: All</option>
+        @foreach(var priority in Model.Priorities)
+        {
+            <option  class="option-dropdown">@priority.Name</option>
+        }
+    </select>
+
+    <select id="teamSelect">
+        <option class="option-dropdown">Team: All</option>
+        @foreach (var team in Model.Teams)
+        {
+            <option  class="option-dropdown">@team.Name</option>
+        }
+    </select>
+
+    <button class="btn btn-secondary"
+            onclick="document.getElementById('ticketSearch').value=''; filterTickets();">
+        Clear
+    </button>
+
+</div>
+
+<div class="panel">
+
+    <div class="table-wrap">
+
+        <table id="ticketsTable">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ticket Number</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Team</th>
+                    <th>Assigned</th>
+                    <th>Created</th>
+                    <th>Modified</th>
+                    <th>Created By</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var t in Model.Tickets)
+                {
+                    <tr>
+
+                        <td>
+                            #@t.Id
+                        </td>
+                        <td>@t.TicketNumber</td>
+
+                        <td class="strong">
+                            @t.Title
+                        </td>
+                       
+
+                        <td>
+                            <span class="badge status-@t.Status.Name.Replace(" ", "-").ToLower()">
+                                @t.Status.Name
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="badge priority-@t.Priority.Name.ToLower()">
+                                @t.Priority.Name
+                            </span>
+                        </td>
+
+                        <td>
+                            @t.Assigned?.Team?.Name
+                        </td>
+
+                        <td>
+                            @t.Assigned.Username
+                        </td>
+                         <td>
+                            @t.DateCreated
+                        </td>
+                        <td>
+                            @t.DateModified
+                        </td>
+                         <td>
+                            @t.CreatedBy.Username
+                        </td>
+
+                        <td class="actions">
+
+                            <a asp-page="/Tickets/Details"
+                               asp-route-id="@t.Id">
+                                View
+                            </a>
+
+                            <a asp-page="/Tickets/Create"
+                               asp-route-id="@t.Id"
+                               asp-route-method="put">
+                                Edit
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div class="table-footer">
+        Showing 1 to @Model.Tickets.Count
+        of @Model.Tickets.Count tickets
+    </div>
+
+</div>
+
+
+@section Scripts
+{
+    <script>
+
+        document
+            .getElementById('ticketSearch')
+            .addEventListener('input', filterTickets);
+
+        function filterTickets()
+        {
+            const q =
+                document
+                    .getElementById('ticketSearch')
+                    .value
+                    .toLowerCase();
+
+            document
+                .querySelectorAll('#ticketsTable tbody tr')
+                .forEach(r =>
+                    r.style.display =
+                        r.innerText
+                            .toLowerCase()
+                            .includes(q)
+                            ? ''
+                            : 'none'
+                );
+        }
+
+    </script>
+}
